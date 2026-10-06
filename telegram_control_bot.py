@@ -57,18 +57,33 @@ class TelegramController:
 
     def poll(self):
         offset = None
+        resp = requests.get(
+            f"{BASE_URL}/getUpdates",
+            params={"offset": -1, "limit": 1, "timeout": 0},
+            timeout=10,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        if not data.get("ok"):
+            raise RuntimeError(f"Telegram error: {data.get('description')}")
+        pending_updates = data.get("result", [])
+        if pending_updates:
+            offset = pending_updates[-1]["update_id"]
+            print("Ignoring Telegram commands sent before this controller started.")
+
         while True:
             params = {"timeout": 10}
             if offset is not None:
                 params["offset"] = offset + 1
             resp = requests.get(f"{BASE_URL}/getUpdates", params=params, timeout=20)
+            resp.raise_for_status()
             data = resp.json()
             if not data.get("ok"):
                 print(f"Telegram error: {data.get('description')}")
                 time.sleep(5)
                 continue
             for update in data.get("result", []):
-                offset = update.get("update_id")
+                offset = update["update_id"]
                 message = update.get("message") or {}
                 text = (message.get("text") or "").strip()
                 chat_id = message.get("chat", {}).get("id")
