@@ -1,0 +1,450 @@
+[
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "hmac",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hmac",
+        "description": "hmac",
+        "detail": "hmac",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "threading",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "threading",
+        "description": "threading",
+        "detail": "threading",
+        "documentation": {}
+    },
+    {
+        "label": "trading_bot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_account_capital_inr",
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "isExtraImport": true,
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_current_price",
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "isExtraImport": true,
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_price_history",
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "isExtraImport": true,
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "send_telegram_message",
+        "importPath": "telegram_bot",
+        "description": "telegram_bot",
+        "isExtraImport": true,
+        "detail": "telegram_bot",
+        "documentation": {}
+    },
+    {
+        "label": "PriceCandle",
+        "kind": 6,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "class PriceCandle:\n    timestamp: datetime\n    price: float  # candle close\ndef _to_pair(symbol: str) -> str:\n    \"\"\"'SOLUSDT' -> 'B-SOL_USDT' (CoinDCX pair format).\"\"\"\n    if symbol.endswith(\"USDT\"):\n        return f\"B-{symbol[:-4]}_USDT\"\n    raise ValueError(f\"Unsupported symbol: {symbol}\")\ndef _get_candles(pair: str, interval: str, limit: int) -> list:\n    r = requests.get(",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_current_price",
+        "kind": 2,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "def fetch_current_price(symbol: str) -> float:\n    \"\"\"Latest 1-minute close for the symbol, e.g. 'SOLUSDT'.\"\"\"\n    candles = _get_candles(_to_pair(symbol), \"1m\", 1)\n    return float(candles[-1][\"close\"])\ndef fetch_price_history(symbol: str, hours: int) -> list:\n    \"\"\"List of PriceCandle (oldest -> newest) covering the lookback window.\"\"\"\n    limit = min(hours * CANDLES_PER_HOUR, 1000)\n    candles = _get_candles(_to_pair(symbol), CANDLE_INTERVAL, limit)\n    return [\n        PriceCandle(",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_price_history",
+        "kind": 2,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "def fetch_price_history(symbol: str, hours: int) -> list:\n    \"\"\"List of PriceCandle (oldest -> newest) covering the lookback window.\"\"\"\n    limit = min(hours * CANDLES_PER_HOUR, 1000)\n    candles = _get_candles(_to_pair(symbol), CANDLE_INTERVAL, limit)\n    return [\n        PriceCandle(\n            timestamp=datetime.fromtimestamp(c[\"time\"] / 1000),\n            price=float(c[\"close\"]),\n        )\n        for c in candles",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_account_capital_inr",
+        "kind": 2,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "def fetch_account_capital_inr(usd_inr_rate: float = 95.95) -> float:\n    \"\"\"\n    Capital in INR.\n    1) If CAPITAL_INR is set in .env, use it (simplest, recommended to start).\n    2) Otherwise read SPOT wallet balances: INR + USDT * usd_inr_rate.\n       NOTE: this does not include money already moved to the futures wallet.\n    \"\"\"\n    manual = os.getenv(\"CAPITAL_INR\")\n    if manual:\n        return float(manual)",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_URL",
+        "kind": 5,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "BASE_URL = \"https://api.coindcx.com\"\nCANDLE_INTERVAL = \"15m\"\nCANDLES_PER_HOUR = 4  # for 15m candles\nTIMEOUT = 10\n@dataclass\nclass PriceCandle:\n    timestamp: datetime\n    price: float  # candle close\ndef _to_pair(symbol: str) -> str:\n    \"\"\"'SOLUSDT' -> 'B-SOL_USDT' (CoinDCX pair format).\"\"\"",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "CANDLE_INTERVAL",
+        "kind": 5,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "CANDLE_INTERVAL = \"15m\"\nCANDLES_PER_HOUR = 4  # for 15m candles\nTIMEOUT = 10\n@dataclass\nclass PriceCandle:\n    timestamp: datetime\n    price: float  # candle close\ndef _to_pair(symbol: str) -> str:\n    \"\"\"'SOLUSDT' -> 'B-SOL_USDT' (CoinDCX pair format).\"\"\"\n    if symbol.endswith(\"USDT\"):",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "CANDLES_PER_HOUR",
+        "kind": 5,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "CANDLES_PER_HOUR = 4  # for 15m candles\nTIMEOUT = 10\n@dataclass\nclass PriceCandle:\n    timestamp: datetime\n    price: float  # candle close\ndef _to_pair(symbol: str) -> str:\n    \"\"\"'SOLUSDT' -> 'B-SOL_USDT' (CoinDCX pair format).\"\"\"\n    if symbol.endswith(\"USDT\"):\n        return f\"B-{symbol[:-4]}_USDT\"",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "TIMEOUT",
+        "kind": 5,
+        "importPath": "coindcx_api",
+        "description": "coindcx_api",
+        "peekOfCode": "TIMEOUT = 10\n@dataclass\nclass PriceCandle:\n    timestamp: datetime\n    price: float  # candle close\ndef _to_pair(symbol: str) -> str:\n    \"\"\"'SOLUSDT' -> 'B-SOL_USDT' (CoinDCX pair format).\"\"\"\n    if symbol.endswith(\"USDT\"):\n        return f\"B-{symbol[:-4]}_USDT\"\n    raise ValueError(f\"Unsupported symbol: {symbol}\")",
+        "detail": "coindcx_api",
+        "documentation": {}
+    },
+    {
+        "label": "get_chat_id",
+        "kind": 2,
+        "importPath": "telegram_bot",
+        "description": "telegram_bot",
+        "peekOfCode": "def get_chat_id() -> None:\n    \"\"\"Print chat IDs of everyone who recently messaged the bot.\"\"\"\n    _check_token()\n    r = requests.get(f\"{BASE}/getUpdates\", timeout=10)\n    data = r.json()\n    if not data.get(\"ok\"):\n        sys.exit(f\"Telegram error: {data.get('description')}\")\n    results = data.get(\"result\", [])\n    if not results:\n        sys.exit(\"No messages found. Open your bot in Telegram, send 'hi', then run again.\")",
+        "detail": "telegram_bot",
+        "documentation": {}
+    },
+    {
+        "label": "send_telegram_message",
+        "kind": 2,
+        "importPath": "telegram_bot",
+        "description": "telegram_bot",
+        "peekOfCode": "def send_telegram_message(text: str) -> bool:\n    \"\"\"Send a message to your chat. Returns True on success.\"\"\"\n    _check_token()\n    if not CHAT_ID:\n        print(\"TELEGRAM_CHAT_ID missing in .env\")\n        return False\n    try:\n        r = requests.post(\n            f\"{BASE}/sendMessage\",\n            json={\"chat_id\": CHAT_ID, \"text\": text},",
+        "detail": "telegram_bot",
+        "documentation": {}
+    },
+    {
+        "label": "TOKEN",
+        "kind": 5,
+        "importPath": "telegram_bot",
+        "description": "telegram_bot",
+        "peekOfCode": "TOKEN = os.getenv(\"TELEGRAM_BOT_TOKEN\")\nCHAT_ID = os.getenv(\"TELEGRAM_CHAT_ID\")\nBASE = f\"https://api.telegram.org/bot{TOKEN}\"\ndef _check_token():\n    if not TOKEN:\n        sys.exit(\"TELEGRAM_BOT_TOKEN missing in .env\")\ndef get_chat_id() -> None:\n    \"\"\"Print chat IDs of everyone who recently messaged the bot.\"\"\"\n    _check_token()\n    r = requests.get(f\"{BASE}/getUpdates\", timeout=10)",
+        "detail": "telegram_bot",
+        "documentation": {}
+    },
+    {
+        "label": "CHAT_ID",
+        "kind": 5,
+        "importPath": "telegram_bot",
+        "description": "telegram_bot",
+        "peekOfCode": "CHAT_ID = os.getenv(\"TELEGRAM_CHAT_ID\")\nBASE = f\"https://api.telegram.org/bot{TOKEN}\"\ndef _check_token():\n    if not TOKEN:\n        sys.exit(\"TELEGRAM_BOT_TOKEN missing in .env\")\ndef get_chat_id() -> None:\n    \"\"\"Print chat IDs of everyone who recently messaged the bot.\"\"\"\n    _check_token()\n    r = requests.get(f\"{BASE}/getUpdates\", timeout=10)\n    data = r.json()",
+        "detail": "telegram_bot",
+        "documentation": {}
+    },
+    {
+        "label": "BASE",
+        "kind": 5,
+        "importPath": "telegram_bot",
+        "description": "telegram_bot",
+        "peekOfCode": "BASE = f\"https://api.telegram.org/bot{TOKEN}\"\ndef _check_token():\n    if not TOKEN:\n        sys.exit(\"TELEGRAM_BOT_TOKEN missing in .env\")\ndef get_chat_id() -> None:\n    \"\"\"Print chat IDs of everyone who recently messaged the bot.\"\"\"\n    _check_token()\n    r = requests.get(f\"{BASE}/getUpdates\", timeout=10)\n    data = r.json()\n    if not data.get(\"ok\"):",
+        "detail": "telegram_bot",
+        "documentation": {}
+    },
+    {
+        "label": "TelegramController",
+        "kind": 6,
+        "importPath": "telegram_control_bot",
+        "description": "telegram_control_bot",
+        "peekOfCode": "class TelegramController:\n    def __init__(self):\n        self.thread = None\n        self.stop_event = threading.Event()\n    def start_loop(self):\n        if self.thread and self.thread.is_alive():\n            return \"Trading bot already running.\"\n        self.stop_event.clear()\n        self.thread = threading.Thread(target=trading_bot.main_loop, daemon=True)\n        self.thread.start()",
+        "detail": "telegram_control_bot",
+        "documentation": {}
+    },
+    {
+        "label": "BOT_TOKEN",
+        "kind": 5,
+        "importPath": "telegram_control_bot",
+        "description": "telegram_control_bot",
+        "peekOfCode": "BOT_TOKEN = trading_bot.__dict__.get(\"CONFIG\")\n# We intentionally avoid depending on a third-party Telegram library.\n# The bot uses Telegram's HTTP API directly with the same credentials already in .env.\nBASE_URL = f\"https://api.telegram.org/bot{trading_bot.__dict__.get('os', __import__('os')).getenv('TELEGRAM_BOT_TOKEN')}\"\nclass TelegramController:\n    def __init__(self):\n        self.thread = None\n        self.stop_event = threading.Event()\n    def start_loop(self):\n        if self.thread and self.thread.is_alive():",
+        "detail": "telegram_control_bot",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_URL",
+        "kind": 5,
+        "importPath": "telegram_control_bot",
+        "description": "telegram_control_bot",
+        "peekOfCode": "BASE_URL = f\"https://api.telegram.org/bot{trading_bot.__dict__.get('os', __import__('os')).getenv('TELEGRAM_BOT_TOKEN')}\"\nclass TelegramController:\n    def __init__(self):\n        self.thread = None\n        self.stop_event = threading.Event()\n    def start_loop(self):\n        if self.thread and self.thread.is_alive():\n            return \"Trading bot already running.\"\n        self.stop_event.clear()\n        self.thread = threading.Thread(target=trading_bot.main_loop, daemon=True)",
+        "detail": "telegram_control_bot",
+        "documentation": {}
+    },
+    {
+        "label": "PriceCandle",
+        "kind": 6,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "class PriceCandle:\n    timestamp: datetime\n    price: float\n@dataclass\nclass RangeState:\n    high: float\n    low: float\n    midpoint: float\n    position_in_range_pct: float  # 0% = at low, 100% = at high\n@dataclass",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "RangeState",
+        "kind": 6,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "class RangeState:\n    high: float\n    low: float\n    midpoint: float\n    position_in_range_pct: float  # 0% = at low, 100% = at high\n@dataclass\nclass Signal:\n    asset: str\n    signal_type: str  # \"BREAKOUT_LONG\", \"BREAKOUT_SHORT\", \"REVERSION_LONG_WATCH\", \"REVERSION_SHORT_WATCH\"\n    confirmed: bool  # True if both BTC and SOL agree, False if partial/divergent",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "Signal",
+        "kind": 6,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "class Signal:\n    asset: str\n    signal_type: str  # \"BREAKOUT_LONG\", \"BREAKOUT_SHORT\", \"REVERSION_LONG_WATCH\", \"REVERSION_SHORT_WATCH\"\n    confirmed: bool  # True if both BTC and SOL agree, False if partial/divergent\n    current_price: float\n    entry_trigger: float\n    stop_loss: float\n    target_1: float\n    target_2: float\n    confidence_note: str",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "RiskState",
+        "kind": 6,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "class RiskState:\n    consecutive_losses: int = 0\n    daily_pnl_inr: float = 0.0\n    daily_loss_limit_hit: bool = False\n    alerts_paused: bool = False\n# ═══════════════════════════════════════════════════════\n# 3. DATA FETCHING (API INTEGRATION LAYER)\n# ═══════════════════════════════════════════════════════\ndef fetch_current_price(symbol: str) -> float:\n    \"\"\"Return the current CoinDCX market price for a pair like SOLUSDT.\"\"\"",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "get_market_status",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def get_market_status() -> dict:\n    \"\"\"Return the latest 24h range snapshot and signal state.\"\"\"\n    sol_price = fetch_current_price(\"SOLUSDT\")\n    btc_price = fetch_current_price(\"BTCUSDT\")\n    sol_history = fetch_price_history(\"SOLUSDT\", CONFIG[\"lookback_hours\"])\n    btc_history = fetch_price_history(\"BTCUSDT\", CONFIG[\"lookback_hours\"])\n    sol_range = compute_range(sol_history)\n    btc_range = compute_range(btc_history)\n    signal = detect_signal(sol_range, sol_price, btc_range, btc_price)\n    return {",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_current_price",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def fetch_current_price(symbol: str) -> float:\n    \"\"\"Return the current CoinDCX market price for a pair like SOLUSDT.\"\"\"\n    return coindcx_fetch_current_price(symbol)\ndef fetch_price_history(symbol: str, hours: int) -> list:\n    \"\"\"Return a local PriceCandle list covering the lookback window.\"\"\"\n    history = coindcx_fetch_price_history(symbol, hours)\n    return [\n        PriceCandle(timestamp=c.timestamp, price=c.price)\n        for c in history\n    ]",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_price_history",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def fetch_price_history(symbol: str, hours: int) -> list:\n    \"\"\"Return a local PriceCandle list covering the lookback window.\"\"\"\n    history = coindcx_fetch_price_history(symbol, hours)\n    return [\n        PriceCandle(timestamp=c.timestamp, price=c.price)\n        for c in history\n    ]\ndef fetch_account_capital_inr() -> float:\n    \"\"\"Return current available capital in INR using CoinDCX account data if configured.\"\"\"\n    return coindcx_fetch_account_capital_inr(usd_inr_rate=CONFIG[\"usd_inr_rate\"])",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_account_capital_inr",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def fetch_account_capital_inr() -> float:\n    \"\"\"Return current available capital in INR using CoinDCX account data if configured.\"\"\"\n    return coindcx_fetch_account_capital_inr(usd_inr_rate=CONFIG[\"usd_inr_rate\"])\n# ═══════════════════════════════════════════════════════\n# 4. RANGE DETECTION\n# ═══════════════════════════════════════════════════════\ndef compute_range(price_history: list) -> RangeState:\n    \"\"\"Compute rolling high/low/midpoint and current position within range.\"\"\"\n    prices = [c.price for c in price_history]\n    high = max(prices)",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "compute_range",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def compute_range(price_history: list) -> RangeState:\n    \"\"\"Compute rolling high/low/midpoint and current position within range.\"\"\"\n    prices = [c.price for c in price_history]\n    high = max(prices)\n    low = min(prices)\n    midpoint = (high + low) / 2\n    current = prices[-1]\n    if high == low:\n        position_pct = 50.0  # avoid division by zero on flat data\n    else:",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "detect_signal",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def detect_signal(sol_range: RangeState, sol_price: float,\n                  btc_range: RangeState, btc_price: float) -> Signal | None:\n    \"\"\"\n    Core trigger logic:\n    - Breakout: price closes above/below range extreme\n    - Reversion: price approaches extreme (within buffer) - treated as a\n      watch condition, not a full signal (needs candle confirmation)\n    - Confirmed vs Partial: both assets must agree for \"confirmed\"\n    \"\"\"\n    buffer = CONFIG[\"reversal_buffer_pct\"]",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_position",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def calculate_position(capital_inr: float, leverage: int, entry: float,\n                       stop: float, direction: str) -> dict:\n    \"\"\"Replicates the manual sizing formula used in this project.\"\"\"\n    leverage = min(leverage, CONFIG[\"max_leverage\"])  # hard ceiling enforced\n    capital_usd = capital_inr / CONFIG[\"usd_inr_rate\"]\n    notional = capital_usd * leverage\n    quantity = notional / entry\n    if direction == \"LONG\":\n        liquidation = entry * (1 - 1 / leverage)\n    else:  # SHORT",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "check_circuit_breaker",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def check_circuit_breaker(risk_state: RiskState, capital_inr: float) -> bool:\n    \"\"\"Returns True if alerts should be paused due to risk limits being hit.\"\"\"\n    if risk_state.consecutive_losses >= CONFIG[\"max_consecutive_losses\"]:\n        risk_state.alerts_paused = True\n    daily_loss_pct = abs(min(risk_state.daily_pnl_inr, 0)) / capital_inr * 100\n    if daily_loss_pct >= CONFIG[\"daily_loss_limit_pct\"]:\n        risk_state.alerts_paused = True\n        risk_state.daily_loss_limit_hit = True\n    return risk_state.alerts_paused\n# ═══════════════════════════════════════════════════════",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "format_alert_message",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def format_alert_message(signal: Signal, sizing: dict) -> str:\n    \"\"\"Produces a human-readable alert.\"\"\"\n    status = \"✅ CONFIRMED\" if signal.confirmed else \"⚠️ PARTIAL - LOWER CONFIDENCE\"\n    return f\"\"\"{status} SIGNAL: {signal.asset} {signal.signal_type}\nCurrent Price: ${signal.current_price}\nEntry Trigger: ${signal.entry_trigger}\nStop-Loss: ${signal.stop_loss}\nTarget 1: ${signal.target_1}\nTarget 2: ${signal.target_2}\nSuggested Quantity: {sizing['quantity']}",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "main_loop",
+        "kind": 2,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "def main_loop():\n    risk_state = RiskState()\n    last_alert = {}  # (signal_type, confirmed) -> time of last send\n    poll_count = 0\n    print(\"🟢 Trading alert bot started. Polling every 30s...\")\n    send_telegram_message(\"🟢 Trading alert bot started. Polling every 30s...\")\n    while True:\n        if risk_state.alerts_paused:\n            print(\"Alerts paused due to risk circuit breaker. Manual reset required.\")\n            send_telegram_message(\"⚠️ Alerts paused due to risk circuit breaker. Manual reset required.\")",
+        "detail": "trading_bot",
+        "documentation": {}
+    },
+    {
+        "label": "CONFIG",
+        "kind": 5,
+        "importPath": "trading_bot",
+        "description": "trading_bot",
+        "peekOfCode": "CONFIG = {\n    \"lookback_hours\": 24,  # rolling window for range detection\n    \"poll_interval_seconds\": 30,\n    \"alert_cooldown_seconds\": 1800,  # don't repeat the same alert within 30 min\n    \"reversal_buffer_pct\": 1.5,  # how close to support/resistance counts as \"approaching\"\n    \"max_leverage\": 10,  # hard ceiling, never exceed\n    \"max_risk_pct_per_trade\": 15.0,  # hard ceiling on capital at risk\n    \"daily_loss_limit_pct\": 10.0,  # circuit breaker threshold\n    \"max_consecutive_losses\": 3,  # circuit breaker threshold\n    \"usd_inr_rate\": 95.95,  # update periodically or fetch live",
+        "detail": "trading_bot",
+        "documentation": {}
+    }
+]
